@@ -3,21 +3,10 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './ListStyles'
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 
-export default function List() {
+export default function List({ places }) {
     const classes = useStyles();
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState(0);
-    const places = [
-        { name: 'Cool Places' },
-        { name: 'Best Beer' },
-        { name: 'Best Chicken' },
-        { name: 'Cool Places' },
-        { name: 'Best Beer' },
-        { name: 'Best Chicken' },
-        { name: 'Cool Places' },
-        { name: 'Best Beer' },
-        { name: 'Best Chicken' }
-    ];
 
     return (
         <div className={classes.container}>
@@ -33,20 +22,18 @@ export default function List() {
             <FormControl className={classes.formControl}>
                 <InputLabel>Rating</InputLabel>
                 <Select value={rating} onChange={(e) => setRating(e.target.value)}>
-                    <MenuItem value={0}>All</MenuItem>
-                    <MenuItem value={3}>Above 3.0</MenuItem>
-                    <MenuItem value={4}>Above 4.0</MenuItem>
-                    <MenuItem value={4.5}>Above 4.5</MenuItem>
+                    <MenuItem value='0'>All</MenuItem>
+                    <MenuItem value='3'>Above 3.0</MenuItem>
+                    <MenuItem value='4'>Above 4.0</MenuItem>
+                    <MenuItem value='4.5'>Above 4.5</MenuItem>
                 </Select>
             </FormControl>
             <Grid container spacing={3} className={classes.list}>
-                {
-                    places?.map((place, i) => (
+                {places?.map((place, i) => (
                         <Grid item key={i} xs={12}>
                             <PlaceDetails place={place} />
                         </Grid>
-                    ))
-                }
+                ))}
             </Grid>
         </div>
     )

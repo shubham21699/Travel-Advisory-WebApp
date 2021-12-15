@@ -10,7 +10,7 @@ import { getPlacesData } from './api/apiIndex'
 
 function App() {
 
-  const [places, setPlaces] = useState({ lat: 0, lng: 0 });
+  const [places, setPlaces] = useState([]);
   const [coordinates, setCoordinates] = useState({});
   const [bounds, setBounds] = useState(null);
 
@@ -26,7 +26,7 @@ function App() {
         console.log(data);
         setPlaces(data);
       })
-  }, [coordinates, bounds]);
+  }, [bounds]);
 
   return (
     <div className="App">
@@ -36,7 +36,7 @@ function App() {
           {/* This item xs={12} means it will take full width on mobile devices */}
           {/* and md={4} means it will take 4 spaces on medium or large devices */}
           <Grid item xs={12} md={4}> 
-            <List />
+            <List places={places} />
           </Grid>
           {/* Map is larger so md={8} will take 8 spaces on medium or larger devices */}
           <Grid item xs={12} md={8} >
